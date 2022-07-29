@@ -1,22 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.fragments.ProfileFragment">
-
-    <TextView
-        android:id="@+id/text_slideshow"
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/driver_information"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginBottom="8dp"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/driver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bạch Hải Đường"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/car_bran"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mercides"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintStart_toStartOf="@+id/driver_name"
+            app:layout_constraintTop_toBottomOf="@+id/driver_name" />
+
+        <TextView
+            android:id="@+id/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="|"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/car_bran"
+            app:layout_constraintStart_toEndOf="@+id/car_bran"
+            app:layout_constraintTop_toTopOf="@+id/car_bran" />
+
+        <TextView
+            android:id="@+id/car_seeds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="7 seeds"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/car_bran"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toTopOf="@+id/car_bran" />
+
+        <TextView
+            android:id="@+id/plates_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:text="59D2-067.73"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/driver_name"
+            app:layout_constraintTop_toBottomOf="@id/car_bran" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/label_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_person_solid"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="2dp"
+            app:layout_constraintEnd_toEndOf="@+id/service_rating_bar"
+
+            app:layout_constraintStart_toStartOf="@+id/service_rating_bar"
+            app:layout_constraintTop_toTopOf="@+id/driver_name" />
+
+        <RatingBar
+            android:id="@+id/service_rating_bar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressTint="@color/dark_gray"
+            android:rating="4.25"
+            android:layout_marginTop="8dp"
+            android:secondaryProgressTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/payment_information"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/driver_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/payment_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payment"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/trip_cost_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Trip fare"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintStart_toStartOf="@+id/payment_label"
+            app:layout_constraintTop_toBottomOf="@+id/payment_label" />
+
+        <TextView
+            android:id="@+id/trip_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15.000đ"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBottom_toBottomOf="@+id/trip_cost_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/trip_cost_label" />
+
+
+
+        <TextView
+            android:id="@+id/trip_insurance_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Trip insurance"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintStart_toStartOf="@+id/payment_label"
+            app:layout_constraintTop_toBottomOf="@+id/trip_cost_label" />
+
+        <TextView
+            android:id="@+id/trip_insurence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.000đ"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBottom_toBottomOf="@+id/trip_insurance_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/trip_insurance_label" />
+
+        <TextView
+            android:id="@+id/payment_by_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Payment by"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintStart_toStartOf="@+id/payment_label"
+            app:layout_constraintTop_toBottomOf="@+id/trip_insurance_label" />
+
+        <TextView
+            android:id="@+id/payment_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MoMo"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBottom_toBottomOf="@+id/payment_by_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/payment_by_label" />
+
+        <TextView
+            android:id="@+id/total_cost_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:text="Total"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintStart_toStartOf="@+id/payment_label"
+            app:layout_constraintTop_toBottomOf="@+id/payment_by_label" />
+
+        <TextView
+            android:id="@+id/total_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="16.000đ"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBottom_toBottomOf="@+id/total_cost_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/total_cost_label"
+            android:textStyle="bold"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/trip_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/payment_information"
+        android:layout_marginTop="8dp"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/trip_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trip ID: 420533122"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/trip_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="13/07/2022"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintStart_toStartOf="@+id/trip_id"
+            app:layout_constraintTop_toBottomOf="@+id/trip_id" />
+
+        <TextView
+            android:id="@+id/divider_difference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="|"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/trip_date"
+            app:layout_constraintStart_toEndOf="@+id/trip_date"
+            app:layout_constraintTop_toTopOf="@+id/trip_date" />
+
+        <TextView
+            android:id="@+id/trip_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="17:46"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/trip_date"
+            app:layout_constraintStart_toEndOf="@+id/divider_difference"
+            app:layout_constraintTop_toTopOf="@+id/trip_date" />
+
+        <LinearLayout
+            android:id="@+id/distance_ride_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FDFDFD"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trip_date">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/distance_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.8 km"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Distance"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="|"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textSize="36dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/ride_time_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10 minutes"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ride time"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/pick_me_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person_solid"
+            app:layout_constraintBottom_toBottomOf="@+id/pick_me_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/pick_me_address"
+            app:tint="@color/red_600" />
+
+        <TextView
+            android:id="@+id/pick_me_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="11dp"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="33 Trần Hưng Đạo, P2, Q.8, TP.HCM"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pick_me_location"
+            app:layout_constraintTop_toBottomOf="@+id/distance_ride_time" />
+
+        <ImageView
+            android:id="@+id/destination_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_location_dot_solid"
+            app:layout_constraintBottom_toBottomOf="@+id/destinaton_address"
+            app:layout_constraintStart_toStartOf="@+id/pick_me_location"
+            app:layout_constraintTop_toTopOf="@+id/destinaton_address" />
+
+        <TextView
+            android:id="@+id/destinaton_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="TT. Kinh Cùng, Phụng Hiệp, Hậu Giang, Việt Nam"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pick_me_location"
+            app:layout_constraintStart_toStartOf="@+id/pick_me_address"
+            app:layout_constraintTop_toBottomOf="@+id/pick_me_address" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>
