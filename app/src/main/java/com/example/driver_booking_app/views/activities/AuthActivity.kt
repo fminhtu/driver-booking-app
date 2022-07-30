@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.driver_booking_app.MainActivity
 import com.example.driver_booking_app.R
 
-class SignInActivity: AppCompatActivity()  {
+class AuthActivity: AppCompatActivity()  {
     private lateinit var signInButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
