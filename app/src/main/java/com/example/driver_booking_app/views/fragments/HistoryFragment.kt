@@ -1,24 +1,20 @@
 package com.example.driver_booking_app.views.fragments
 
-
+import com.example.driver_booking_app.models.HistoryAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.driver_booking_app.R
-import com.example.driver_booking_app.databinding.FragmentHistoryBinding
-import com.example.driver_booking_app.models.HistoryAdapter
 import com.example.driver_booking_app.viewModels.HistoryViewModel
 
 class HistoryFragment : Fragment() {
-    private var _binding: FragmentHistoryBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,24 +24,22 @@ class HistoryFragment : Fragment() {
         val historyViewModel =
             ViewModelProvider(this).get(HistoryViewModel::class.java)
 
-        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val rootView = inflater.inflate(R.layout.fragment_history, container, false)
 
-//        val textView: TextView = binding.textSlideshow
-        historyViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-        }
-
-        val recyclerView = root.findViewById<RecyclerView>(R.id.history_recycler_view)
+        val recyclerView_history = rootView.findViewById<RecyclerView>(R.id.history_recycler_view)
+//        emptyServiceTextView = rootView.findViewById(R.id.service_empty_text_view)
+//        serviceViewModel.setServiceList()
         val adapter = HistoryAdapter(requireContext())
-        recyclerView.adapter = adapter
-
-
-        return root
+        recyclerView_history.adapter = adapter
+        adapter.onItemClick = {position ->
+            val bundle = Bundle()
+//            bundle.putString("serviceID", serviceViewModel.selectedServiceList.value!!.get(position).serviceID)
+            findNavController().navigate(R.id.action_nav_history_to_nav_detail_transport, bundle)
+        }
+        return rootView
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 }

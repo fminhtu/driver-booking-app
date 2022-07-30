@@ -1,371 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.fragments.ProfileFragment">
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/driver_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp">
+    tools:context="views.fragments.ProfileFragment">
 
-        <TextView
-            android:id="@+id/driver_name"
-            android:layout_width="wrap_content"
+
+<!--    <include-->
+<!--        android:id="@+id/profile_loader_layout"-->
+<!--        layout="@layout/layout_circular_loader"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/my_profile_app_bar" />-->
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bạch Hải Đường"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_marginTop="8dp"
-            android:id="@+id/car_bran"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mercides"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintStart_toStartOf="@+id/driver_name"
-            app:layout_constraintTop_toBottomOf="@+id/driver_name" />
+            <RelativeLayout
+                android:id="@+id/profile_relative_layout"
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="NotSibling">
 
-        <TextView
-            android:id="@+id/divider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="|"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/car_bran"
-            app:layout_constraintStart_toEndOf="@+id/car_bran"
-            app:layout_constraintTop_toTopOf="@+id/car_bran" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/background_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/side_nav_bar"
+                    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/car_seeds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="7 seeds"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintBottom_toBottomOf="@+id/car_bran"
-            app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toTopOf="@+id/car_bran" />
+                    <TextView
+                        android:id="@+id/profile_update_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="UPDATE"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/plates_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorPrimaryDark"
-            android:padding="5dp"
-            android:text="59D2-067.73"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/driver_name"
-            app:layout_constraintTop_toBottomOf="@id/car_bran" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/avatar_image_view"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/ava"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/label_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_person_solid"
-            app:civ_border_color="@color/colorPrimaryDark"
-            app:civ_border_width="2dp"
-            app:layout_constraintEnd_toEndOf="@+id/service_rating_bar"
-
-            app:layout_constraintStart_toStartOf="@+id/service_rating_bar"
-            app:layout_constraintTop_toTopOf="@+id/driver_name" />
-
-        <RatingBar
-            android:id="@+id/service_rating_bar"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:progressTint="@color/dark_gray"
-            android:rating="4.25"
-            android:layout_marginTop="8dp"
-            android:secondaryProgressTint="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_image" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/payment_information"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/driver_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/payment_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Payment"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        android:id="@+id/profile_name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="TAO LÀ TÚ NGU"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/avatar_image_view"
+                        android:focusable="false"/>
 
 
-        <TextView
-            android:id="@+id/trip_cost_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Trip fare"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintStart_toStartOf="@+id/payment_label"
-            app:layout_constraintTop_toBottomOf="@+id/payment_label" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/trip_cost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="15.000đ"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintBottom_toBottomOf="@+id/trip_cost_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/trip_cost_label" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/customer_card_view"
+                    android:layout_width="380dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="170dp"
+                    android:background="@drawable/profile_border"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    app:cardCornerRadius="2dp">
 
+                    <LinearLayout
+                        android:id="@+id/customer_linear_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
 
+                        <LinearLayout
+                            android:id="@+id/role_linear_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/trip_insurance_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Trip insurance"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintStart_toStartOf="@+id/payment_label"
-            app:layout_constraintTop_toBottomOf="@+id/trip_cost_label" />
+                            <TextView
+                                android:id="@+id/profile_role_titte"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Member"
+                                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/trip_insurence"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1.000đ"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintBottom_toBottomOf="@+id/trip_insurance_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/trip_insurance_label" />
+                            <TextView
+                                android:id="@+id/profile_role_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:text="RUBY"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/payment_by_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Payment by"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintStart_toStartOf="@+id/payment_label"
-            app:layout_constraintTop_toBottomOf="@+id/trip_insurance_label" />
+                        </LinearLayout>
 
-        <TextView
-            android:id="@+id/payment_by"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MoMo"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintBottom_toBottomOf="@+id/payment_by_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/payment_by_label" />
+                        <LinearLayout
+                            android:id="@+id/ratings_linear_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/total_cost_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="15dp"
-            android:text="Total"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintStart_toStartOf="@+id/payment_label"
-            app:layout_constraintTop_toBottomOf="@+id/payment_by_label" />
+                            <TextView
+                                android:id="@+id/profile_rating_label_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rating"
+                                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/total_cost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="16.000đ"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintBottom_toBottomOf="@+id/total_cost_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/total_cost_label"
-            android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/profile_rating_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:text="0"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/trip_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/payment_information"
-        android:layout_marginTop="8dp"
-        android:padding="8dp">
+                        <LinearLayout
+                            android:id="@+id/following_linear_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/trip_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trip ID: 420533122"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                            <TextView
+                                android:id="@+id/profile_following_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Following"
+                                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/trip_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="13/07/2022"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintStart_toStartOf="@+id/trip_id"
-            app:layout_constraintTop_toBottomOf="@+id/trip_id" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:text="0"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                tools:ignore="TouchTargetSizeCheck" />
 
-        <TextView
-            android:id="@+id/divider_difference"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="|"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/trip_date"
-            app:layout_constraintStart_toEndOf="@+id/trip_date"
-            app:layout_constraintTop_toTopOf="@+id/trip_date" />
+                        </LinearLayout>
+                    </LinearLayout>
 
-        <TextView
-            android:id="@+id/trip_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="17:46"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintBottom_toBottomOf="@+id/trip_date"
-            app:layout_constraintStart_toEndOf="@+id/divider_difference"
-            app:layout_constraintTop_toTopOf="@+id/trip_date" />
+                </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/distance_ride_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="#FDFDFD"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trip_date">
+            </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/information_linear_layout"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_relative_layout">
 
-                <TextView
-                    android:id="@+id/distance_detail"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/email_linear_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2.8 km"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    android:textStyle="bold" />
+                    android:background="@drawable/profile_border"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/profile_email_label_tv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/email_account_drawable" />
+
+                    <TextView
+                        android:id="@+id/profile_email_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:focusableInTouchMode="false"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:singleLine="true"
+                        android:text="hobaotruongmaugiao@gmail.com"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/phone_linear_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Distance"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/profile_border"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp">
+
+                    <ImageView
+                        android:id="@+id/profile_phone_label_tv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/phone_account_drawable" />
+
+                    <EditText
+                        android:id="@+id/profile_phone_tv"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:focusableInTouchMode="true"
+                        android:hint="Enter phone number"
+                        android:inputType="phone"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:textStyle="normal"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/address_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/profile_border"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp">
+
+                    <ImageView
+                        android:id="@+id/profile_address_label_tv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        app:srcCompat="@drawable/location_account_drawable" />
+
+                    <EditText
+                        android:id="@+id/profile_address_tv"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:focusableInTouchMode="true"
+                        android:hint="Enter address"
+                        android:inputType="textShortMessage"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:textStyle="normal"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/payment_detail_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/profile_border"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp">
+
+                    <ImageView
+                        android:id="@+id/profile_payment_detail_label_tv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        app:srcCompat="@drawable/credit_account_drawable" />
+
+                    <EditText
+                        android:id="@+id/profile_payment_detail_tv"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:focusableInTouchMode="true"
+                        android:hint="Enter payment information"
+                        android:inputType="textShortMessage"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:textSize="16sp"
+                        android:textStyle="normal"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/change_password_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/profile_border"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp">
+
+                    <ImageView
+                        android:id="@+id/profile_password_label_tv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        app:srcCompat="@drawable/password_account_drawable"/>
+
+                    <TextView
+                        android:id="@+id/profile_password_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="25dp"
+                        android:singleLine="true"
+                        android:text="Change password"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="|"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:textSize="36dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/ride_time_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10 minutes"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Ride time"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/pick_me_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_person_solid"
-            app:layout_constraintBottom_toBottomOf="@+id/pick_me_address"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pick_me_address"
-            app:tint="@color/red_600" />
-
-        <TextView
-            android:id="@+id/pick_me_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="11dp"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:text="33 Trần Hưng Đạo, P2, Q.8, TP.HCM"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pick_me_location"
-            app:layout_constraintTop_toBottomOf="@+id/distance_ride_time" />
-
-        <ImageView
-            android:id="@+id/destination_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_location_dot_solid"
-            app:layout_constraintBottom_toBottomOf="@+id/destinaton_address"
-            app:layout_constraintStart_toStartOf="@+id/pick_me_location"
-            app:layout_constraintTop_toTopOf="@+id/destinaton_address" />
-
-        <TextView
-            android:id="@+id/destinaton_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="2dp"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:text="TT. Kinh Cùng, Phụng Hiệp, Hậu Giang, Việt Nam"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pick_me_location"
-            app:layout_constraintStart_toStartOf="@+id/pick_me_address"
-            app:layout_constraintTop_toBottomOf="@+id/pick_me_address" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

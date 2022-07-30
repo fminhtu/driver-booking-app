@@ -12,7 +12,7 @@
     <string name="menu_profile">Profile</string>
 
 
-<!--    map-->
+    <!--    map-->
     <string name="enable_gps">Enable GPS</string>
     <string name="required_for_this_app">Required for this app</string>
     <string name="enable_now">Enable Now</string>
@@ -30,7 +30,7 @@
     <string name="take_next_ride">Take Next Ride</string>
     <string name="route_not_available_choose_different_locations">Route Not Available: Choose different pickup and drop location</string>
 
-<!--    login-->
+    <!--    login-->
     <string name="customer_signup_switch_text">Đăng ký tài khoản Khách hàng</string>
     <string name="signup_phone_number_hint">Số điện thoại</string>
     <string name="signup_vendor_name_hint">Họ và Tên / Tên doanh nghiệp</string>
@@ -50,7 +50,7 @@
     <string name="signup_email_hint">E-Mail</string>
     <string name="activity_sign_up_title">Đăng ký</string>
 
-<!--    history item -->
+    <!--    history item -->
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_goog_map_actitvit">GoogMapActitvit</string>
