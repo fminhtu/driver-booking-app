@@ -1,42 +1,51 @@
 package com.example.driver_booking_app.views.fragments
 
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.driver_booking_app.databinding.FragmentHomeBinding
+import com.example.driver_booking_app.R
+import com.example.driver_booking_app.models.GoogleMap
 import com.example.driver_booking_app.viewModels.HomeViewModel
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.MapStyleOptions
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(){
 
-    private var _binding: FragmentHomeBinding? = null
-
+    private lateinit var rootView:View
+    private lateinit var mapFragment: SupportMapFragment
+    private lateinit var homeViewModel: HomeViewModel
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        rootView = inflater.inflate(R.layout.fragment_home, container, false)
+        initComponent()
+        return rootView
+    }
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    private fun initComponent(){
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        mapFragment = childFragmentManager.findFragmentById(R.id.fragment_map) as GoogleMap
 
-//        val textView: TextView = binding.textSlideshow
-        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
+        mapFragment.getMapAsync{
+            try{
+                val success = it.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.uber_maps_style))
+                if(!success){
+                    Log.e("MapError", "Style parse error")
+                }
+            } catch (e: Resources.NotFoundException){
+                Log.e("MapError", e.message!!)
+            }
         }
-        return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
