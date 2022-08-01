@@ -59,4 +59,7 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.3'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
+    implementation("com.github.kittinunf.fuel:fuel-gson:2.3.1")
+    implementation("com.google.code.gson:gson:2.8.9")
 }
