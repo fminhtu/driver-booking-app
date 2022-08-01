@@ -5,9 +5,8 @@ import android.os.StrictMode
 import android.util.Log
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.fuel.httpPost
-import com.google.gson.Gson
+import com.github.kittinunf.result.Result
 
-data class User(var email: String, var password: String)
 
 object HttpPost  {
     init {
@@ -15,14 +14,23 @@ object HttpPost  {
         StrictMode.setThreadPolicy(policy)
     }
 
-    fun post(url: String) {
-        val user = User("fminhtu@gmail.com", "fminhtu")
-
-        val (_, _, result) = url.httpPost()
-            .jsonBody(Gson().toJson(user).toString())
+    fun post(url: String, json: String): String {
+//        val user = Account("fminhtu@gmail.com", "fminhtu")
+        val (request, response, result) = url.httpPost()
+            .jsonBody(json.toString())
             .responseString()
-        Log.d("message", result.toString())
 
+        when (result) {
+            is Result.Failure -> {
+                Log.d("message", "Failure:${result.get()}")
+            }
+            is Result.Success -> {
+                Log.d("message", "Success:${result.get()}")
+            }
+            else -> { }
+        }
+
+        return result.get()
     }
 
 }
