@@ -1,4 +1,5 @@
 <resources>
+    <string name="api_key">AIzaSyD-HPqZ6715o4r5STSx5mGtlx8vqjTLZNc</string>
     <string name="app_name">driver-booking-app</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

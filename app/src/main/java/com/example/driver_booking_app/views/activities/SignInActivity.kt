@@ -32,7 +32,6 @@ class SignInActivity: AppCompatActivity()  {
 //                finishAffinity();
 //                startActivity(Intent(this, MainActivity::class.java))
 //            }
-
             startActivity(Intent(this, MainActivity::class.java))
         }
 
