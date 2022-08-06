@@ -2,6 +2,7 @@ package com.example.driver_booking_app.views.fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.driver_booking_app.R
@@ -26,6 +30,13 @@ import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import java.util.*
+enum class PANEL{
+    LOCATION, BOOK_RIDE, WAITING_DRIVER
+}
+
+enum class SEED {
+    FOUR, SEVEN
+}
 
 class HomeFragment : Fragment(){
 
@@ -34,14 +45,20 @@ class HomeFragment : Fragment(){
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var locationPanel: ConstraintLayout
     private lateinit var bookRidePanel: ConstraintLayout
-    private lateinit var pickMeLocation: AppCompatEditText
-    private lateinit var destintionLocation: AppCompatEditText
+    private lateinit var waitingDriverPanel: ConstraintLayout
     val AUTOCOMPLETE_REQUEST_CODE = 1
     //location pannel
     private lateinit var confirmLocationBtn: Button
+    private lateinit var pickMeLocation: AppCompatEditText
+    private lateinit var destintionLocation: AppCompatEditText
 
     //bookRide pannel
     private lateinit var bookRideBtn: Button
+
+    //watingDriver panel
+    private lateinit var cancelFindingDriverBtn: Button
+    private lateinit var fourSeedLabel: ImageButton
+    private lateinit var sevenSeedLabel: ImageButton
 
     // This property is only valid between onCreateView and
 
@@ -56,42 +73,70 @@ class HomeFragment : Fragment(){
     }
 
     private fun initComponent(){
+        Places.initialize(requireContext(),"AIzaSyAB70onimU_ofrLKNnrK5VFN3TAUjONoA4")
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         mapFragment = childFragmentManager.findFragmentById(R.id.fragment_map) as GoogleMap
-        Places.initialize(requireContext(),"AIzaSyAB70onimU_ofrLKNnrK5VFN3TAUjONoA4")
         locationPanel = rootView.findViewById(R.id.location_confirm_panel)
         bookRidePanel = rootView.findViewById(R.id.book_ride_panel)
+        waitingDriverPanel = rootView.findViewById(R.id.waiting_driver_panel)
 
         confirmLocationBtn = locationPanel.findViewById(R.id.confirm_location_button)
         bookRideBtn = bookRidePanel.findViewById(R.id.book_ride_btn)
+        fourSeedLabel = bookRidePanel.findViewById(R.id.four_seeder_label)
+        sevenSeedLabel = bookRidePanel.findViewById(R.id.seven_seeder_label)
         pickMeLocation = locationPanel.findViewById(R.id.pickUpTextView)
         destintionLocation = locationPanel.findViewById(R.id.destination_location)
+        cancelFindingDriverBtn = rootView.findViewById(R.id.cancel_finding_driver_btn)
 
-        pickMeLocation.setOnClickListener {
+        setOnclickLisner()
+        getMapAsync()
+    }
 
+    private fun setOnclickLisner(){
+        pickMeLocation.setOnClickListener { getAutoCompletePlace() }
+        confirmLocationBtn.setOnClickListener { activePanel(PANEL.BOOK_RIDE) }
+        bookRideBtn.setOnClickListener { activePanel(PANEL.WAITING_DRIVER) }
+        cancelFindingDriverBtn.setOnClickListener { activePanel(PANEL.LOCATION) }
+        fourSeedLabel.setOnClickListener { activeSeed(SEED.FOUR) }
+        sevenSeedLabel.setOnClickListener { activeSeed(SEED.SEVEN) }
 
-            // Set the fields to specify which types of place data to
-            // return after the user has made a selection.
-            val fields = Arrays.asList(Place.Field.ID,Place.Field.ADDRESS,Place.Field.LAT_LNG, Place.Field.NAME,
+    }
+
+    private fun activeSeed(seed: SEED){
+        when(seed){
+            SEED.FOUR -> {
+                fourSeedLabel.setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.red_600),
+                    android.graphics.PorterDuff.Mode.SRC_IN
                 )
-            // Start the autocomplete intent.
-            val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
-                .setCountry("VN")
-                .build(requireContext())
-            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
+                sevenSeedLabel.setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.black),
+                    android.graphics.PorterDuff.Mode.SRC_IN
+                )
+            }
+            SEED.SEVEN -> {
+                fourSeedLabel.setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.black),
+                    android.graphics.PorterDuff.Mode.SRC_IN
+                )
+                sevenSeedLabel.setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.red_600),
+                    android.graphics.PorterDuff.Mode.SRC_IN
+                )
+            }
         }
+    }
 
-        confirmLocationBtn.setOnClickListener {
-            locationPanel.visibility = View.GONE
-            bookRidePanel.visibility = View.VISIBLE
-        }
+    private fun getAutoCompletePlace(){
+        val fields = Arrays.asList(Place.Field.ID,Place.Field.ADDRESS,Place.Field.LAT_LNG, Place.Field.NAME,)
+        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
+            .setCountry("VN")
+            .build(requireContext())
+        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
+    }
 
-        bookRideBtn.setOnClickListener {
-            locationPanel.visibility = View.VISIBLE
-            bookRidePanel.visibility = View.GONE
-        }
-
-        mapFragment.getMapAsync{
+    private fun getMapAsync(){
+        mapFragment.getMapAsync {
             try{
                 val success = it.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.uber_maps_style))
                 if(!success){
@@ -99,6 +144,26 @@ class HomeFragment : Fragment(){
                 }
             } catch (e: Resources.NotFoundException){
                 Log.e("MapError", e.message!!)
+            }
+        }
+    }
+
+    private fun activePanel(panel: PANEL){
+        when (panel){
+            PANEL.BOOK_RIDE -> {
+                locationPanel.visibility = View.GONE
+                bookRidePanel.visibility = View.VISIBLE
+                waitingDriverPanel.visibility = View.GONE
+            }
+            PANEL.LOCATION -> {
+                locationPanel.visibility = View.VISIBLE
+                waitingDriverPanel.visibility = View.GONE
+                bookRidePanel.visibility = View.GONE
+            }
+            PANEL.WAITING_DRIVER -> {
+                waitingDriverPanel.visibility = View.VISIBLE
+                locationPanel.visibility = View.GONE
+                bookRidePanel.visibility = View.GONE
             }
         }
     }
