@@ -57,4 +57,10 @@
     <string name="title_activity_goog_map_actitvit">GoogMapActitvit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="payment_method">
+        <item>Cash</item>
+        <item>MoMo</item>
+        <item>ZaloPay</item>
+    </string-array>
 </resources>
