@@ -1,4 +1,4 @@
-package com.example.driver_booking_app.views.activities
+package com.example.customer_booking_app.views.activities
 
 
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.driver_booking_app.MainActivity
-import com.example.driver_booking_app.R
+import com.example.customer_booking_app.MainActivity
+import com.example.customer_booking_app.R
 
 class SignInActivity: AppCompatActivity()  {
     private lateinit var signInButton: Button

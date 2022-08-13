@@ -1,4 +1,4 @@
-package com.example.driver_booking_app.viewModels
+package com.example.customer_booking_app.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

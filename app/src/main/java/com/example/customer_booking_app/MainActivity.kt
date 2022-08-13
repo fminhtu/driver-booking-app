@@ -1,4 +1,4 @@
-package com.example.driver_booking_app
+package com.example.customer_booking_app
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,9 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.driver_booking_app.views.activities.SignInActivity
+import com.example.customer_booking_app.views.activities.SignInActivity
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 

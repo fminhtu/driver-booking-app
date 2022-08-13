@@ -1,4 +1,4 @@
-package com.example.driver_booking_app.ultils
+package com.example.customer_booking_app.ultils
 
 import android.os.StrictMode
 import java.io.BufferedReader

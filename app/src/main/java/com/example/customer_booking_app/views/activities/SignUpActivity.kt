@@ -1,9 +1,9 @@
-package com.example.driver_booking_app.views.activities
+package com.example.customer_booking_app.views.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.driver_booking_app.R
+import com.example.customer_booking_app.R
 
 class SignUpActivity : AppCompatActivity() {
     private var loginBtn: Button? = null

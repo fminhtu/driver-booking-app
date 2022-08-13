@@ -1,4 +1,4 @@
-package com.example.driver_booking_app.models
+package com.example.customer_booking_app.models
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.driver_booking_app.R
+import com.example.customer_booking_app.R
 
 class HistoryAdapter(var context: Context): RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     var onItemClick:((Int) -> Unit)? = null

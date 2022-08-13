@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.driver_booking_app">
+    package="com.example.customer_booking_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -17,7 +17,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Driverbookingapp"
+        android:theme="@style/Theme.Customerbookingapp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
@@ -26,17 +26,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAB70onimU_ofrLKNnrK5VFN3TAUjONoA4" />
         <activity
-            android:name=".views.activities.SignInActivity"
+            android:name="com.example.customer_booking_app.views.activities.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.SignUpActivity"
+            android:name="com.example.customer_booking_app.views.activities.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.customer_booking_app.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.Driverbookingapp.NoActionBar" />
+            android:theme="@style/Theme.Customerbookingapp.NoActionBar" />
         <activity
-            android:name=".views.activities.SplashScreenActivity"
+            android:name="com.example.customer_booking_app.views.activities.SplashScreenActivity"
             android:exported="true"
             android:noHistory="true">
             <intent-filter>

@@ -1,6 +1,6 @@
-package com.example.driver_booking_app.views.fragments
+package com.example.customer_booking_app.views.fragments
 
-import com.example.driver_booking_app.models.HistoryAdapter
+import com.example.customer_booking_app.models.HistoryAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.driver_booking_app.R
-import com.example.driver_booking_app.viewModels.HistoryViewModel
+import com.example.customer_booking_app.R
+import com.example.customer_booking_app.viewModels.HistoryViewModel
 
 class HistoryFragment : Fragment() {
     // This property is only valid between onCreateView and

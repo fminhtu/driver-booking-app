@@ -1,4 +1,4 @@
-package com.example.driver_booking_app.views.activities
+package com.example.customer_booking_app.views.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import com.example.driver_booking_app.R
+import com.example.customer_booking_app.R
 
 
 @SuppressLint("CustomSplashScreen")

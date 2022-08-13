@@ -1,4 +1,4 @@
-package com.example.driver_booking_app.models
+package com.example.customer_booking_app.models
 
 
 import com.google.android.gms.maps.CameraUpdateFactory

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Driverbookingapp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Customerbookingapp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
@@ -14,12 +14,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Driverbookingapp.NoActionBar">
+    <style name="Theme.Customerbookingapp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Driverbookingapp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Customerbookingapp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Theme.Driverbookingapp.PopupOverlay" parent="ThemeOverlay.AppCompat.DayNight" />
+    <style name="Theme.Customerbookingapp.PopupOverlay" parent="ThemeOverlay.AppCompat.DayNight" />
 </resources>
