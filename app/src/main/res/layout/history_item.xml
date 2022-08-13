@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/history_item_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="0dp"
+    app:strokeColor="#CCCCCC"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/label_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/car_logo_history"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/date_book_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="20/11/2022"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toEndOf="@+id/label_image"
+            app:layout_constraintTop_toTopOf="@+id/label_image" />
+
+        <TextView
+            android:id="@+id/time_book_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="15:05"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toEndOf="@+id/label_image"
+            app:layout_constraintStart_toStartOf="@+id/date_book_car"
+            app:layout_constraintTop_toBottomOf="@+id/date_book_car" />
+
+        <ImageView
+            android:id="@+id/card_dotted_divider"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="15dp"
+            android:layerType="software"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_image"
+            app:srcCompat="@drawable/dotted_line_drawable" />
+
+        <ImageView
+            android:id="@+id/pick_me_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/label_image"
+            app:layout_constraintTop_toBottomOf="@+id/card_dotted_divider"
+            android:src="@drawable/ic_person_solid"
+            app:tint="@color/red_600"/>
+
+        <TextView
+            android:id="@+id/pick_me_address"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="33 Trần Hưng Đạo, P2, Q.8, TP.HCM"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pick_me_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pick_me_location"
+            app:layout_constraintTop_toTopOf="@+id/pick_me_location"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+        <ImageView
+            android:id="@+id/destination_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/label_image"
+            app:layout_constraintTop_toBottomOf="@+id/pick_me_location"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_location_dot_solid" />
+
+        <TextView
+            android:id="@+id/destinaton_address"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="TT. Kinh Cùng, Phụng Hiệp, Hậu Giang, Việt Nam"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/destination_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pick_me_location"
+            app:layout_constraintTop_toTopOf="@+id/destination_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
