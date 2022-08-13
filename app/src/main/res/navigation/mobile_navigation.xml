@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="com.example.driver_booking_app.views.fragments.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_thanks"
+            app:destination="@id/nav_thanks" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_history"
@@ -27,10 +31,15 @@
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 
-
     <fragment
         android:id="@+id/nav_detail_transport"
         android:name="com.example.driver_booking_app.views.fragments.DetailTransportFragment"
         android:label="Detail transport"
         tools:layout="@layout/fragment_detail_transport" />
+
+    <fragment
+        android:id="@+id/nav_thanks"
+        android:name="com.example.driver_booking_app.views.fragments.ThanksFragment"
+        android:label="Detail transport"
+        tools:layout="@layout/fragment_thanks" />
 </navigation>
