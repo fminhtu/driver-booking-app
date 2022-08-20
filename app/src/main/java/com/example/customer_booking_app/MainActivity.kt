@@ -2,7 +2,9 @@ package com.example.customer_booking_app
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.Menu
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -13,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.customer_booking_app.ultils.Information
 import com.example.customer_booking_app.views.activities.SignInActivity
 import com.google.android.material.navigation.NavigationView
 
@@ -22,8 +25,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView:NavigationView
+    lateinit var usernameTextView: TextView
+    lateinit var emailTextView: TextView
     private  lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,6 +56,12 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawer_layout)
         navController = findNavController(R.id.nav_host_fragment_content_main)
         navView = findViewById(R.id.nav_view)
+
+        val headerView = navView.getHeaderView(0)
+        usernameTextView = headerView.findViewById(R.id.username_text_view)
+        emailTextView = headerView.findViewById(R.id.email_text_view)
+        usernameTextView.text = Information.username
+        emailTextView.text = Information.email
     }
 
 
@@ -62,6 +72,12 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton("Cancle") { dialogInterface, _ -> dialogInterface.dismiss() }
             .setPositiveButton("Sign out") { dialogInterface, _ ->
                 startActivity(Intent(this, SignInActivity::class.java))
+                Information.token = ""
+                Information.email = ""
+                Information.phone = ""
+                Information.username = ""
+                val prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                prefs.edit().clear().commit()
                 dialogInterface.dismiss()
                 finish()
             }

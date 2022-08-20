@@ -60,4 +60,10 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.3'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 }

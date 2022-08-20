@@ -53,8 +53,10 @@
             android:orientation="vertical" >
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signup_name_edit_text"
                     android:layout_width="match_parent"
@@ -66,14 +68,62 @@
                     android:layout_marginEnd="24dp"
                     android:paddingTop="24dp"
                     android:paddingBottom="12dp"
-                    android:hint="Name"
+                    android:hint="Username"
                     android:textColorHint="#616161"
                     tools:ignore="TextContrastCheck"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="12dp"
+                    android:textColorHint="#616161"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirm_password_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_conf_password_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:hint="Confirm password"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="12dp"
+                    android:textColorHint="#616161"
+                    tools:ignore="TextContrastCheck"  />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signup_email_edit_text"
                     android:layout_width="match_parent"
@@ -91,8 +141,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_number_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signup_phone_number_edit_text"
                     android:layout_width="match_parent"
@@ -109,89 +161,22 @@
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/signup_address_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:hint="Seed: 4 or 7"
-                    android:inputType="textPostalAddress"
-                    android:minHeight="48dp"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="12dp"
-                    android:textColorHint="#616161"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/signup_password_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:hint="License plates"
-                    android:inputType="number"
-                    android:minHeight="48dp"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="12dp"
-                    android:textColorHint="#616161"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:id="@+id/customer_signup_switch_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/conf_password_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="12dp"
-                    android:textColorHint="#616161"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/signup_conf_password_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:hint="Confirm password"
-                    android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="12dp"
-                    android:textColorHint="#616161"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
+                android:layout_marginTop="24dp"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/black"
+                app:strokeColor="#757575"
+                app:strokeWidth="2dp"
+                android:text="Sign up"
+                android:textSize="15sp"
+                android:layout_gravity="center"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,20 +206,6 @@
                     android:backgroundTint="@color/black"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/customer_signup_switch_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/black"
-                app:strokeColor="#757575"
-                app:strokeWidth="2dp"
-                android:text="Sign up"
-                android:textSize="11sp"
-                android:layout_gravity="center"/>
         </LinearLayout>
     </ScrollView>
 

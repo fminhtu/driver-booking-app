@@ -1,22 +1,38 @@
 package com.example.customer_booking_app.views.fragments
 
+import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.customer_booking_app.MainActivity
+import com.example.customer_booking_app.R
 import com.example.customer_booking_app.databinding.FragmentProfileBinding
+import com.example.customer_booking_app.models.Account
+import com.example.customer_booking_app.ultils.Information
 import com.example.customer_booking_app.viewModels.ProfileViewModel
+import com.example.customer_booking_app.views.activities.SignInActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.awaitResponse
 
 class ProfileFragment : Fragment() {
+    private lateinit var rootView: View
+    private lateinit var usernameTextView: EditText
+    private lateinit var emailTextView: EditText
+    private lateinit var phoneTextView: EditText
 
-    private var _binding: FragmentProfileBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
+    private lateinit var updateBtn: TextView
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,19 +40,70 @@ class ProfileFragment : Fragment() {
     ): View {
         val profileViewModel =
             ViewModelProvider(this).get(ProfileViewModel::class.java)
+        Log.i("ASD", "ONCETAE")
+        rootView = inflater.inflate(R.layout.fragment_profile, container, false)
+        initComponent()
+        return rootView
 
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    }
+    private fun initComponent(){
+        usernameTextView = rootView.findViewById(R.id.profile_name_tv)
+        emailTextView = rootView.findViewById(R.id.profile_email_tv)
+        phoneTextView = rootView.findViewById(R.id.profile_phone_tv)
+        updateBtn = rootView.findViewById(R.id.profile_update_tv)
 
-//        val textView: TextView = binding.textSlideshow
-        profileViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
+        updateBtn.setOnClickListener {
+            if(isCorrectData()){
+                callApiUpdateProfile()
+            }
         }
-        return root
+        usernameTextView.setText(Information.username)
+        emailTextView.setText(Information.email)
+        phoneTextView.setText(Information.phone)
+
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setTitle("Please Wait")
+        progressDialog.setMessage("Loading ...")
+        progressDialog.setCancelable(false)
+    }
+    private fun isCorrectData():Boolean{
+        if(emailTextView.text.isNullOrEmpty() || emailTextView.text.isNullOrBlank()){
+            Toast.makeText(requireContext(), "Invalid email", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(phoneTextView.text.isNullOrEmpty() || phoneTextView.text.isNullOrBlank()){
+            Toast.makeText(requireContext(), "Invalid phone number", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
+    private fun callApiUpdateProfile(){
+        val api = com.example.customer_booking_app.ultils.Retrofit.createApi()
+        val acc = Account(Information.username, null, phoneTextView.text.toString(), emailTextView.text.toString() )
+        GlobalScope.launch(Dispatchers.IO){
+            val res = api.editProfileCustomer( Information.token, acc).awaitResponse()
+            val toastMessage:String
+            if (res.code() == 200 && res.body()!!.message.equals("Successfully edited.")){
+                toastMessage =  "Updated"
+                Information.email = acc.email
+                Information.phone = acc.phone
+                withContext(Dispatchers.Main){
+                    (requireActivity() as MainActivity).emailTextView.setText(Information.email)
+                }
+            } else if(res.code() == 401){
+                Log.i("ASD", res.body()!!.message)
+                toastMessage = res.body().toString()
+            } else {
+                toastMessage = "Unexpected server error, please try again"
+            }
+            withContext(Dispatchers.Main) {
+                progressDialog.hide()
+                Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 }

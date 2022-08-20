@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.preference.PreferenceManager
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.customer_booking_app.R
@@ -21,9 +22,9 @@ class SplashScreenActivity : AppCompatActivity() {
         )
         // Wait 3 seconds on the splash screen before continuing.
         Handler(Looper.getMainLooper()).postDelayed({
+
             startActivity(Intent(this, SignInActivity::class.java))
-//            Toast.makeText(this@SplashScreenActivity, "Done", Toast.LENGTH_SHORT).show()
             finish()
-        }, 3000)
+        }, 2000)
     }
 }
