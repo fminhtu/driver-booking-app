@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context="views.fragments.ProfileFragment">
 
-
-<!--    <include-->
-<!--        android:id="@+id/profile_loader_layout"-->
-<!--        layout="@layout/layout_circular_loader"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/my_profile_app_bar" />-->
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
@@ -150,7 +139,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
-                                android:text="0"
+                                android:text="5"
                                 android:textSize="20sp"
                                 android:textStyle="bold"/>
 
@@ -175,7 +164,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
-                                android:text="0"
+                                android:text="100"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
                                 tools:ignore="TouchTargetSizeCheck" />
@@ -212,13 +201,14 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/email_account_drawable" />
-
-                    <TextView
+                    <EditText
                         android:id="@+id/profile_email_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:focusableInTouchMode="false"
+                        android:background="@null"
+                        android:focusableInTouchMode="true"
+                        android:focusable="true"
                         android:paddingLeft="25dp"
                         android:paddingRight="25dp"
                         android:singleLine="true"
@@ -244,12 +234,12 @@
 
                     <EditText
                         android:id="@+id/profile_phone_tv"
-
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
                         android:focusableInTouchMode="true"
+                        android:focusable="true"
                         android:hint="Enter phone number"
                         android:inputType="phone"
                         android:paddingLeft="25dp"
@@ -273,18 +263,14 @@
                         android:id="@+id/profile_address_label_tv"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        app:srcCompat="@drawable/location_account_drawable" />
+                        app:srcCompat="@drawable/ic_baseline_person_24" />
 
-                    <EditText
-                        android:id="@+id/profile_address_tv"
-
+                    <TextView
+                        android:id="@+id/profile_seed_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:focusableInTouchMode="true"
-                        android:hint="Enter address"
-                        android:inputType="textShortMessage"
                         android:paddingLeft="25dp"
                         android:paddingRight="25dp"
                         android:singleLine="true"
@@ -309,16 +295,12 @@
                         android:layout_height="36dp"
                         app:srcCompat="@drawable/credit_account_drawable" />
 
-                    <EditText
-                        android:id="@+id/profile_payment_detail_tv"
-
+                    <TextView
+                        android:id="@+id/profile_license_number_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:focusableInTouchMode="true"
-                        android:hint="Enter payment information"
-                        android:inputType="textShortMessage"
                         android:paddingLeft="25dp"
                         android:paddingRight="25dp"
                         android:textSize="16sp"

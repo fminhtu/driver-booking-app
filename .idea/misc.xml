@@ -3,14 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable-v24/ic_signin_signup_mobile.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/email_account_drawable.xml" value="0.1215" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.162" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.1215" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_credit_card_24.xml" value="0.162" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_directions_car_24.xml" value="0.162" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.162" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_key_24.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_baseline_phone_android_24.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_location_dot_solid.xml" value="0.1215" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_menu_camera.xml" value="0.162" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/ic_person_solid.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/password_account_drawable.xml" value="0.1215" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/drawable/phone_account_drawable.xml" value="0.1215" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/activity_main.xml" value="0.14719202898550723" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/activity_sign_in.xml" value="0.14947916666666666" />
-        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/activity_sign_up.xml" value="0.12760416666666666" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.14947916666666666" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/book_ride_panel.xml" value="0.14947916666666666" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/content_main.xml" value="0.12760416666666666" />

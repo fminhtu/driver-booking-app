@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="@string/activity_sign_in_title"
+        android:text="SIGN IN"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,17 +36,19 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_input_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signin_email_edit_text"
+                android:id="@+id/username_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
-                android:hint="@string/signup_email_hint"
-                android:inputType="textEmailAddress"
+                android:hint="Username"
+                android:inputType="text"
                 android:minHeight="48dp"
                 android:paddingTop="24dp"
                 android:paddingBottom="12dp"
@@ -55,18 +57,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signin_password_edit_text"
+                android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
-                android:hint="@string/signup_password_hint"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:paddingTop="24dp"
@@ -84,7 +88,7 @@
             android:layout_marginEnd="24dp"
             android:layout_gravity="end"
             android:textStyle="bold"
-            android:text="@string/forgot_password" />
+            android:text="Forgot password?" />
 
         <Button
             android:id="@+id/signin_confirm_button"
@@ -93,7 +97,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:text="@string/signin_btn_text"
+            android:text="Sign in"
             tools:ignore="DuplicateSpeakableTextCheck" />
 
     </LinearLayout>
@@ -110,13 +114,13 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/signin_signup_question_unclickable"/>
+            android:text="Don't have account?"/>
         <Space android:layout_height="0dp" android:layout_width="10dp"/>
         <TextView
             android:id="@+id/signup_prompt"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/signin_signup_question_clickable"
+            android:text="Sign up"
             android:textStyle="bold"/>
     </LinearLayout>
 
