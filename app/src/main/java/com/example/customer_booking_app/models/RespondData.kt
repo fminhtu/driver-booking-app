@@ -1,7 +1,7 @@
 package com.example.customer_booking_app.models
 
 data class RegisterRespond(
-    val message: String = ""
+    var message:String
 )
 
 data class SignInRespond(

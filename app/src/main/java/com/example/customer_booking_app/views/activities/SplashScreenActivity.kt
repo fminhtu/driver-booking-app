@@ -22,7 +22,6 @@ class SplashScreenActivity : AppCompatActivity() {
         )
         // Wait 3 seconds on the splash screen before continuing.
         Handler(Looper.getMainLooper()).postDelayed({
-
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
         }, 2000)

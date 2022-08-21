@@ -144,6 +144,11 @@ class SignInActivity: AppCompatActivity()  {
                         startActivity(Intent(this@SignInActivity, MainActivity::class.java))
                         finish()
                     }
+                } else {
+                    withContext(Dispatchers.Main){
+                        progressDialog.hide()
+                        Toast.makeText(this@SignInActivity, toastMessage, Toast.LENGTH_LONG).show()
+                    }
                 }
             } else {
                 withContext(Dispatchers.Main){

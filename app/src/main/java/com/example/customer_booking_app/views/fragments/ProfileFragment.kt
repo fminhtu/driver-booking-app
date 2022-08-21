@@ -92,8 +92,7 @@ class ProfileFragment : Fragment() {
                     (requireActivity() as MainActivity).emailTextView.setText(Information.email)
                 }
             } else if(res.code() == 401){
-                Log.i("ASD", res.body()!!.message)
-                toastMessage = res.body().toString()
+                toastMessage = " Unauthenticated user"
             } else {
                 toastMessage = "Unexpected server error, please try again"
             }

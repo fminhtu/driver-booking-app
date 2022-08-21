@@ -78,8 +78,7 @@ class SignUpActivity : AppCompatActivity() {
             if (res.code() == 201){
                toastMessage =  "Register success!"
             } else if(res.code() == 401){
-                Log.i("ASD", res.body()!!.message)
-                toastMessage = res.body().toString()
+                toastMessage = "Username already exist"
             } else {
                 toastMessage = "Unexpected server error, please try again"
             }
