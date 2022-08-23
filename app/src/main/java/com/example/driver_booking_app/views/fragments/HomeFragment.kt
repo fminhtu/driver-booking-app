@@ -13,12 +13,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.driver_booking_app.R
 import com.example.driver_booking_app.models.GoogleMap
+import com.example.driver_booking_app.models.TripResquest
+import com.example.driver_booking_app.ultils.Information
+import com.example.driver_booking_app.ultils.TripInformation
 import com.example.driver_booking_app.viewModels.HomeViewModel
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.material.chip.Chip
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlinx.coroutines.*
+import retrofit2.awaitResponse
+import java.util.concurrent.TimeUnit
 
 
 enum class ViewControl{
@@ -62,9 +68,6 @@ class HomeFragment : Fragment(){
         receiveTripPanel = rootView.findViewById(R.id.receive_trip_panel)
         circularProgressBar = receiveTripPanel.findViewById(R.id.circularProgressBar)
         acceptBtn = receiveTripPanel.findViewById(R.id.accept_btn)
-        circularProgressBar.apply {
-            setProgressWithAnimation(100f, 5000)
-        }
 
         //control_trip_panel
         controlTripPanel = rootView.findViewById(R.id.control_trip_panel)
@@ -72,8 +75,49 @@ class HomeFragment : Fragment(){
         setOnClickListener()
         setProgressChange(false)
         getMapAsync()
+        waitingStripLogic()
     }
+    private fun waitingStripLogic(){
+        val api = com.example.driver_booking_app.ultils.Retrofit.createApi()
+        val req = TripResquest(
+           "driver",
+            Information.username,
+        )
+        GlobalScope.launch(Dispatchers.IO){
+            try{
+                var isHaveATrip = false
+                while(!isHaveATrip){
+                    val res = api.findStrip( Information.token, req).awaitResponse()
+                    if(res.code() == 200){
+                        Log.i("ASD", res.body().toString())
+                        if(!res.body()!!.driver.equals("") && !res.body()!!.passenger.isNullOrEmpty()){
+                            isHaveATrip = true
+                            withContext(Dispatchers.Main){
+                                if(TripInformation.driver.equals("")){
+                                    TripInformation.driver = Information.username
+                                    TripInformation.passenger = res.body()!!.passenger
+                                    TripInformation.isStart = "false"
+                                    controlPanel(ViewControl.DISPLAY_RECEIVE_TRIP)
+                                    circularProgressBar.apply {
+                                        setProgressWithAnimation(100f, 5000)
+                                    }
+                                } else if(TripInformation.isStart.equals("false")){
+                                    controlPanel(ViewControl.DISPLAY_CONTROL_TRIP)
+                                }
+                                Log.i("ASD", "HAVE A TRIP")
+                            }
+                        }
+                    }
+                    delay(TimeUnit.SECONDS.toMillis(1))
+                    Log.i("ASD",res.code().toString())
+                }
+            } catch (e: Exception){
+                Log.i("ASD", e.message.toString())
+            }
 
+
+        }
+    }
     private fun setProgressChange(isNull: Boolean){
         if(isNull){
             circularProgressBar.onProgressChangeListener = null
@@ -82,6 +126,9 @@ class HomeFragment : Fragment(){
         circularProgressBar.onProgressChangeListener = { progressBar ->
             if(progressBar.equals(100f)){
                 Toast.makeText(requireContext(), "CANCLE", Toast.LENGTH_SHORT).show()
+//                TripInformation.driver = ""
+//                TripInformation.passenger = ""
+//                TripInformation.isStart = ""
                 controlPanel(ViewControl.HIDE_ALL)
             }
         }

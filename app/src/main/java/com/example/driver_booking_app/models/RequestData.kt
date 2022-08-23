@@ -15,3 +15,13 @@ data class LoginAccount(
     var password:String
 )
 
+data class TripResquest(
+    var role: String = "driver",
+    var username: String = "",
+    var origin_address:String = "",
+    var origin_lat:String = "",
+    var origin_long:String = "",
+    var dest_address:String = "",
+    var dest_lat:String = "",
+    var dest_long:String = ""
+)
