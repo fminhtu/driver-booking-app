@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -17,6 +18,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.customer_booking_app.R
 import com.example.customer_booking_app.models.GoogleMap
+import com.example.customer_booking_app.models.TripResquest
+import com.example.customer_booking_app.ultils.Information
+import com.example.customer_booking_app.ultils.TripInformation
 import com.example.customer_booking_app.viewModels.HomeViewModel
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -25,7 +29,11 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import kotlinx.coroutines.*
+import retrofit2.awaitResponse
 import java.util.*
+import java.util.concurrent.TimeUnit
+
 enum class PANEL{
     LOCATION, BOOK_RIDE, WAITING_DRIVER
 }
@@ -55,7 +63,7 @@ class HomeFragment : Fragment(){
     private lateinit var cancelFindingDriverBtn: Button
     private lateinit var fourSeedLabel: ImageButton
     private lateinit var sevenSeedLabel: ImageButton
-
+    private var isCancle: Boolean = false
     // This property is only valid between onCreateView and
 
     override fun onCreateView(
@@ -69,7 +77,7 @@ class HomeFragment : Fragment(){
     }
 
     private fun initComponent(){
-        Places.initialize(requireContext(),"AIzaSyAB70onimU_ofrLKNnrK5VFN3TAUjONoA4")
+        Places.initialize(requireContext(),"AIzaSyD-HPqZ6715o4r5STSx5mGtlx8vqjTLZNc")
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         mapFragment = childFragmentManager.findFragmentById(R.id.fragment_map) as GoogleMap
         locationPanel = rootView.findViewById(R.id.location_confirm_panel)
@@ -87,12 +95,65 @@ class HomeFragment : Fragment(){
         setOnclickLisner()
         getMapAsync()
     }
-
+    private fun isTrueDataLocation():Boolean{
+        if(pickMeLocation.text!!.isNullOrEmpty() || destintionLocation.text!!.isNullOrEmpty()){
+            Toast.makeText(requireContext(), "Please enter correct location", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
     private fun setOnclickLisner(){
-        pickMeLocation.setOnClickListener { getAutoCompletePlace() }
-        confirmLocationBtn.setOnClickListener { activePanel(PANEL.BOOK_RIDE) }
-        bookRideBtn.setOnClickListener { activePanel(PANEL.WAITING_DRIVER) }
-        cancelFindingDriverBtn.setOnClickListener { activePanel(PANEL.LOCATION) }
+        var findingDriver: Job? = null
+//        pickMeLocation.setOnClickListener { getAutoCompletePlace() }
+        confirmLocationBtn.setOnClickListener {
+            if(isTrueDataLocation()){
+                activePanel(PANEL.BOOK_RIDE)
+            }
+        }
+
+        bookRideBtn.setOnClickListener {
+            activePanel(PANEL.WAITING_DRIVER)
+            isCancle = false
+            val api = com.example.customer_booking_app.ultils.Retrofit.createApi()
+            val req = TripResquest(
+                "passenger",
+                Information.username,
+            )
+            findingDriver = GlobalScope.launch(Dispatchers.IO) {
+                try{
+                    var isHaveATrip = false
+                    while(!isHaveATrip){
+                        if(isCancle){
+                            break
+                        }
+                        val res = api.findStrip( Information.token, req).awaitResponse()
+                        if(res.code() == 200){
+                            Log.i("ASD", res.body().toString())
+                            if(!res.body()!!.driver.equals("") && !res.body()!!.passenger.isNullOrEmpty()){
+                                isHaveATrip = true
+                                withContext(Dispatchers.Main){
+                                    if(TripInformation.driver.equals("")){
+                                        TripInformation.driver = Information.username
+                                        TripInformation.passenger = res.body()!!.passenger
+                                        TripInformation.isStart = "false"
+                                    }
+
+                                    Log.i("ASD", "HAVE A TRIP")
+                                }
+                            }
+                        }
+                        delay(TimeUnit.SECONDS.toMillis(1))
+                        Log.i("ASD",res.code().toString())
+                    }
+                } catch (e: Exception){
+                    Log.i("ASD", e.message.toString())
+                }
+            }
+        }
+        cancelFindingDriverBtn.setOnClickListener {
+            isCancle = true
+            activePanel(PANEL.LOCATION)
+        }
         fourSeedLabel.setOnClickListener { activeSeed(SEED.FOUR) }
         sevenSeedLabel.setOnClickListener { activeSeed(SEED.SEVEN) }
 
@@ -123,13 +184,14 @@ class HomeFragment : Fragment(){
         }
     }
 
-    private fun getAutoCompletePlace(){
-        val fields = Arrays.asList(Place.Field.ID,Place.Field.ADDRESS,Place.Field.LAT_LNG, Place.Field.NAME,)
-        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
-            .setCountry("VN")
-            .build(requireContext())
-        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
-    }
+
+//    private fun getAutoCompletePlace(){
+//        val fields = Arrays.asList(Place.Field.ID,Place.Field.ADDRESS,Place.Field.LAT_LNG, Place.Field.NAME,)
+//        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
+//            .setCountry("VN")
+//            .build(requireContext())
+//        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
+//    }
 
     private fun getMapAsync(){
         mapFragment.getMapAsync {
@@ -164,28 +226,28 @@ class HomeFragment : Fragment(){
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-            when (resultCode) {
-                Activity.RESULT_OK -> {
-                    data?.let {
-                        val place = Autocomplete.getPlaceFromIntent(data)
-                        Log.i("ERROR", "Place: ${place.name}, ${place.id}")
-                    }
-                }
-                AutocompleteActivity.RESULT_ERROR -> {
-                    // TODO: Handle the error.
-                    data?.let {
-                        val status = Autocomplete.getStatusFromIntent(data)
-                        Log.i("ERROR", status.statusMessage ?: "")
-                    }
-                }
-                Activity.RESULT_CANCELED -> {
-                    // The user canceled the operation.
-                }
-            }
-            return
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+//            when (resultCode) {
+//                Activity.RESULT_OK -> {
+//                    data?.let {
+//                        val place = Autocomplete.getPlaceFromIntent(data)
+//                        Log.i("ERROR", "Place: ${place.name}, ${place.id}")
+//                    }
+//                }
+//                AutocompleteActivity.RESULT_ERROR -> {
+//                    // TODO: Handle the error.
+//                    data?.let {
+//                        val status = Autocomplete.getStatusFromIntent(data)
+//                        Log.i("ERROR", status.statusMessage ?: "")
+//                    }
+//                }
+//                Activity.RESULT_CANCELED -> {
+//                    // The user canceled the operation.
+//                }
+//            }
+//            return
+//        }
+//        super.onActivityResult(requestCode, resultCode, data)
+//    }
 }

@@ -8,6 +8,18 @@ object Information {
     val role = "passenger"
 }
 
+object TripInformation {
+    var driver = ""
+    var passenger = ""
+    var isStart = ""
+    var destLat = ""
+    var destLong = ""
+    var originLat = ""
+    var originLong = ""
+    var originAddress = ""
+    var destAddress = ""
+}
+
 object URL{
-    var baseUrl = "http://10.0.1.170:5000"
+    var baseUrl = "http://10.0.2.2:5000/"
 }

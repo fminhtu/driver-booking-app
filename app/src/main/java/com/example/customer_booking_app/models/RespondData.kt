@@ -20,3 +20,9 @@ data class GetProfileRespond(
 )
 
 data class EditProfileRespond(val message: String = "")
+
+data class TripResponse(
+    var driver: String = "",
+    var message: String = "",
+    var passenger: String = "",
+)

@@ -19,6 +19,9 @@ interface ApiRequest {
 
     @POST("/edit-profile")
     fun editProfileCustomer(@Header("x-access-token") authToken: String, @Body information: Account): Call<EditProfileRespond>
+
+    @POST("/trip-request")
+    fun findStrip(@Header("x-access-token") authToken: String, @Body tripResquest: TripResquest): Call<TripResponse>
 }
 
 object Retrofit{
