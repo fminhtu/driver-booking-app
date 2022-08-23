@@ -30,6 +30,8 @@
         app:chipIconTint="@color/white"
         android:text="Decline"/>
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,6 +56,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="8dp"/>
+
+        <include
+            android:id="@+id/waiting_driver_panel"
+            layout="@layout/waiting_passenger_panel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="8dp"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

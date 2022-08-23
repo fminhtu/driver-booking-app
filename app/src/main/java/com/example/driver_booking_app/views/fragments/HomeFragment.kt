@@ -46,6 +46,10 @@ class HomeFragment : Fragment(){
     //control_trip_panel
     private lateinit var controlTripPanel: CardView
     private lateinit var startBtn: Button
+
+    //  find button
+    private lateinit var findBtn: Button
+    private var findStatus:Boolean = false
     // This property is only valid between onCreateView and
     val AUTOCOMPLETE_REQUEST_CODE = 1
 
@@ -72,6 +76,9 @@ class HomeFragment : Fragment(){
         //control_trip_panel
         controlTripPanel = rootView.findViewById(R.id.control_trip_panel)
         startBtn = controlTripPanel.findViewById(R.id.start_btn)
+        //waiting passenger panel
+        controlTripPanel = rootView.findViewById(R.id.control_trip_panel)
+        findBtn = rootView.findViewById(R.id.finding_driver_btn)
         setOnClickListener()
         setProgressChange(false)
         getMapAsync()
@@ -86,7 +93,7 @@ class HomeFragment : Fragment(){
         GlobalScope.launch(Dispatchers.IO){
             try{
                 var isHaveATrip = false
-                while(!isHaveATrip){
+                while(!isHaveATrip && findStatus == true){
                     val res = api.findStrip( Information.token, req).awaitResponse()
                     if(res.code() == 200){
                         Log.i("ASD", res.body().toString())
@@ -108,7 +115,7 @@ class HomeFragment : Fragment(){
                             }
                         }
                     }
-                    delay(TimeUnit.SECONDS.toMillis(1))
+                    delay(TimeUnit.SECONDS.toMillis(5))
                     Log.i("ASD",res.code().toString())
                 }
             } catch (e: Exception){
@@ -172,6 +179,19 @@ class HomeFragment : Fragment(){
         declineBtn.setOnClickListener {
             controlPanel(ViewControl.HIDE_ALL)
             setProgressChange(true)
+        }
+
+        findBtn.setOnClickListener {
+            if (findStatus == false) {
+                findStatus = true
+                findBtn.text = "Cancel"
+                waitingStripLogic()
+            } else {
+                findStatus = false
+                findBtn.text = "Find"
+            }
+
+//            Toast.makeText(requireContext(), "Event", Toast.LENGTH_SHORT).show()
         }
 
         startBtn.setOnClickListener {

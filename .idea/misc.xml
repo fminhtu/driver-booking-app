@@ -81,18 +81,26 @@
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/Project/app/src/main/res/layout/select_option_car_type.xml" value="0.2375" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/Project/app/src/main/res/layout/waiting_driver_panel.xml" value="0.17447916666666666" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/Project/app/src/main/res/menu/activity_main_drawer.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable-v24/ic_baseline_map_24.xml" value="0.289" />
+        <entry key="app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.289" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17325227963525835" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.17325227963525835" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.17325227963525835" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.17325227963525835" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.17325227963525835" />
+        <entry key="app/src/main/res/layout/book_ride_panel.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.17325227963525835" />
         <entry key="app/src/main/res/layout/control_trip_panel.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_detail_transport.xml" value="0.17325227963525835" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.17325227963525835" />
         <entry key="app/src/main/res/layout/fragment_thanks.xml" value="0.17325227963525835" />
         <entry key="app/src/main/res/layout/history_item.xml" value="0.17325227963525835" />
+        <entry key="app/src/main/res/layout/location_confirm_panel.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.17325227963525835" />
+        <entry key="app/src/main/res/layout/receive_trip_panel.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/waiting_driver_panel.xml" value="0.20448179271708683" />
+        <entry key="app/src/main/res/layout/waiting_passenger_panel.xml" value="0.35625" />
       </map>
     </option>
   </component>
