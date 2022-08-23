@@ -75,7 +75,7 @@ class HomeFragment : Fragment(){
         setOnClickListener()
         setProgressChange(false)
         getMapAsync()
-        waitingStripLogic()
+//        waitingStripLogic()
     }
     private fun waitingStripLogic(){
         val api = com.example.driver_booking_app.ultils.Retrofit.createApi()
