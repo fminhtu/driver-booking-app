@@ -9,5 +9,5 @@ object Information {
 }
 
 object URL{
-    var baseUrl = "http://10.0.1.170:5000"
+    var baseUrl = "http://10.0.2.2:5000"
 }
