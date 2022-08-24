@@ -26,8 +26,8 @@ import com.example.customer_booking_app.ultils.Information
 import com.example.customer_booking_app.ultils.TripInformation
 import com.example.customer_booking_app.viewModels.HomeViewModel
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.libraries.places.api.Places
 import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.*
 import retrofit2.awaitResponse
@@ -44,13 +44,13 @@ enum class SEED {
 class HomeFragment : Fragment(){
 
     private lateinit var rootView:View
-    private lateinit var mapFragment: SupportMapFragment
+    private lateinit var mapFragment: GoogleMap
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var locationPanel: ConstraintLayout
     private lateinit var bookRidePanel: ConstraintLayout
     private lateinit var waitingDriverPanel: ConstraintLayout
     private lateinit var informationDriverPanel: MaterialCardView
-    val AUTOCOMPLETE_REQUEST_CODE = 1
+
     //location pannel
     private lateinit var confirmLocationBtn: Button
     private lateinit var pickMeLocation: AppCompatEditText
@@ -58,17 +58,23 @@ class HomeFragment : Fragment(){
 
     //bookRide pannel
     private lateinit var bookRideBtn: Button
+    private lateinit var kilometerTextView: TextView
 
     //watingDriver panel
     private lateinit var cancelFindingDriverBtn: Button
     private lateinit var fourSeedLabel: ImageButton
     private lateinit var sevenSeedLabel: ImageButton
-    private var isCancle: Boolean = false
+    private var isCancel: Boolean = false
 
     //information_driver_panel
     private lateinit var driverNameTextView: TextView
     private lateinit var driverLicenseNumberTextView: TextView
 
+    private var isPopupNotification = false
+    var pickMeLat:String = "10.754452"
+    var pickMeLng:String = "106.686539"
+    var destLat:String = "10.7625"
+    var destLng:String = "106.6823"
     // This property is only valid between onCreateView and
 
     override fun onCreateView(
@@ -82,7 +88,7 @@ class HomeFragment : Fragment(){
     }
 
     private fun initComponent(){
-        Places.initialize(requireContext(),"AIzaSyD-HPqZ6715o4r5STSx5mGtlx8vqjTLZNc")
+        //Places.initialize(requireContext(),"AIzaSyD-HPqZ6715o4r5STSx5mGtlx8vqjTLZNc")
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         mapFragment = childFragmentManager.findFragmentById(R.id.fragment_map) as GoogleMap
         locationPanel = rootView.findViewById(R.id.location_confirm_panel)
@@ -92,6 +98,7 @@ class HomeFragment : Fragment(){
 
         confirmLocationBtn = locationPanel.findViewById(R.id.confirm_location_button)
         bookRideBtn = bookRidePanel.findViewById(R.id.book_ride_btn)
+        kilometerTextView = bookRidePanel.findViewById(R.id.kilometer_text_view)
         fourSeedLabel = bookRidePanel.findViewById(R.id.four_seeder_label)
         sevenSeedLabel = bookRidePanel.findViewById(R.id.seven_seeder_label)
         pickMeLocation = locationPanel.findViewById(R.id.pickUpTextView)
@@ -111,20 +118,27 @@ class HomeFragment : Fragment(){
         return true
     }
     private fun setOnclickLisner(){
-        var findingDriver: Job? = null
-//        pickMeLocation.setOnClickListener { getAutoCompletePlace() }
         confirmLocationBtn.setOnClickListener {
             if(isTrueDataLocation()){
+                pickMeLocation.setText("9B Nguyễn Văn Cừ, Phường 1, Quận 5, Thành phố Hồ Chí Minh")
+                destintionLocation.setText("216 D. Bá Trạc, Phường 2, Quận 8, Thành phố Hồ Chí Minh")
+                var currLocation = LatLng(pickMeLat.toDouble(), pickMeLng.toDouble())
+                var destinationLocation = LatLng(destLat.toDouble(), destLng.toDouble())
+                mapFragment.markerFrom(currLocation, "I'm there")
+                mapFragment.markerTo(destinationLocation, "Destination")
+                mapFragment.moveCamera(currLocation, 15f)
+                val kilometer = Math.round(mapFragment.distance(currLocation, destinationLocation) / 1000 * 10.0) / 10.0
+                kilometerTextView.setText(kilometer.toString())
                 activePanel(PANEL.BOOK_RIDE)
             }
         }
-
         bookRideBtn.setOnClickListener {
             activePanel(PANEL.WAITING_DRIVER)
             callRequestTripApi()
         }
         cancelFindingDriverBtn.setOnClickListener {
-            isCancle = true
+            isCancel = true
+            mapFragment.clearMap()
             activePanel(PANEL.LOCATION)
         }
         fourSeedLabel.setOnClickListener { activeSeed(SEED.FOUR) }
@@ -133,23 +147,23 @@ class HomeFragment : Fragment(){
     }
 
     private fun callRequestTripApi(){
-        isCancle = false
+        isCancel = false
         val api = com.example.customer_booking_app.ultils.Retrofit.createApi()
         val req = TripResquest(
             "passenger",
             Information.username,
             pickMeLocation.text.toString(),
-            "20",
-            "30",
+            "10.7467",
+            "106.6891",
             destintionLocation.text.toString(),
-            "50",
-            "70"
+            "10.7625",
+            "106.6823"
         )
         GlobalScope.launch(Dispatchers.IO) {
             try{
                 var isHaveATrip = false
                 while(!isHaveATrip){
-                    if(isCancle){
+                    if(isCancel){
                         break
                     }
                     val res = api.findStrip( Information.token, req).awaitResponse()
@@ -168,7 +182,7 @@ class HomeFragment : Fragment(){
                 Log.i("ASD", e.message.toString())
                 var isHaveATrip = false
                 while(!isHaveATrip){
-                    if(isCancle){
+                    if(isCancel){
                         break
                     }
                     val res = api.findStrip( Information.token, req).awaitResponse()
@@ -302,20 +316,47 @@ class HomeFragment : Fragment(){
         )
         var isEndtrip = false
         GlobalScope.launch(Dispatchers.IO) {
+            var oldLocation = pickMeLat
             try{
                 while(!isEndtrip){
                     val tripInfoResponse = api.getTripInformation(Information.token, tripInfoReq).awaitResponse()
-                    Log.i("ASD", "End trip")
                     Log.i("ASD", tripInfoResponse.code().toString())
                     Log.i("ASD", tripInfoResponse.body().toString())
                     if(tripInfoResponse.code() == 200) {
+
                         if(tripInfoResponse.body()!!.message.equals("driver is not found")){
                             isEndtrip = true
                             withContext(Dispatchers.Main){
                                 TripInformation.driver = ""
-                                isCancle = true
+                                isCancel = true
+                                mapFragment.clearMap()
+                                isPopupNotification = false
                                 Log.i("ASD", "End trip")
                                 findNavController().navigate(R.id.action_nav_home_to_nav_thanks)
+                            }
+                        } else {
+                            Log.i("ASD", "update location 1")
+                            val location = LatLng(tripInfoResponse.body()!!.lat.toDouble(), tripInfoResponse.body()!!.long.toDouble())
+                            val destination = LatLng(destLat.toDouble(), destLng.toDouble())
+                            Log.i("ASD", "update location 2")
+                            if(!tripInfoResponse.body()!!.lat.equals(oldLocation)){
+                                withContext(Dispatchers.Main){
+                                    Log.i("ASD", "update location 3")
+                                    oldLocation = tripInfoResponse.body()!!.lat
+                                    mapFragment.clearMap()
+                                    Log.i("ASD", "update location 4")
+                                    mapFragment.markerFrom(location, "I'm there")
+                                    mapFragment.markerTo(destination, "Destination")
+                                    mapFragment.moveCamera(location, 15f)
+                                }
+                            }
+                            Log.i("ASD", "update location 5")
+                            val distance = mapFragment.distance(destination,location)
+                            if(distance < 100 && !isPopupNotification){
+                                withContext(Dispatchers.Main){
+                                    mapFragment.moveCamera(location, 18f)
+                                    Toast.makeText(requireContext(), "You are going to destination", Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
                     }
@@ -324,19 +365,45 @@ class HomeFragment : Fragment(){
             } catch (e: Exception){
                 while(!isEndtrip){
                     val tripInfoResponse = api.getTripInformation(Information.token, tripInfoReq).awaitResponse()
-                    Log.i("ASD", "End trip")
                     Log.i("ASD", tripInfoResponse.code().toString())
                     Log.i("ASD", tripInfoResponse.body().toString())
-
                     if(tripInfoResponse.code() == 200) {
-                        isEndtrip = true
-                        if(tripInfoResponse.body()!!.message.equals("driver is not found"))
+                        if(tripInfoResponse.body()!!.message.equals("driver is not found")){
+                            isEndtrip = true
                             withContext(Dispatchers.Main){
-                                isCancle = true
                                 TripInformation.driver = ""
+                                isCancel = true
+                                mapFragment.clearMap()
+                                isPopupNotification = false
                                 Log.i("ASD", "End trip")
                                 findNavController().navigate(R.id.action_nav_home_to_nav_thanks)
                             }
+                        } else {
+                            Log.i("ASD", "update location 1")
+                            val location = LatLng(tripInfoResponse.body()!!.lat.toDouble(), tripInfoResponse.body()!!.long.toDouble())
+                            val destination = LatLng(destLat.toDouble(), destLng.toDouble())
+                            Log.i("ASD", "update location 2")
+                            if(!tripInfoResponse.body()!!.lat.equals(oldLocation)){
+                                withContext(Dispatchers.Main){
+                                    Log.i("ASD", "update location 3")
+                                    oldLocation = tripInfoResponse.body()!!.lat
+                                    mapFragment.clearMap()
+                                    Log.i("ASD", "update location 4")
+                                    mapFragment.markerFrom(location, "I'm there")
+                                    mapFragment.markerTo(destination, "Destination")
+                                    mapFragment.moveCamera(location, 15f)
+                                }
+                            }
+                            Log.i("ASD", "update location 5")
+                            val distance = mapFragment.distance(destination,location)
+                            if(distance < 100 && !isPopupNotification){
+                                isPopupNotification = true
+                                withContext(Dispatchers.Main){
+                                    mapFragment.moveCamera(location, 18f)
+                                    Toast.makeText(requireContext(), "You are going to destination", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
                     }
                     delay(TimeUnit.SECONDS.toMillis(2))
                 }
