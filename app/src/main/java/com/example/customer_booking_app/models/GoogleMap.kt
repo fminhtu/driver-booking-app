@@ -1,4 +1,4 @@
-package com.example.driver_booking_app.models
+package com.example.customer_booking_app.models
 
 
 import android.graphics.Color
@@ -6,7 +6,7 @@ import android.util.Log
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.driver_booking_app.R
+import com.example.customer_booking_app.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
