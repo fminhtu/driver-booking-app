@@ -21,6 +21,11 @@ object TripInformation {
     var originAddress = ""
     var destAddress = ""
 }
+
+object PassengerProfileObj{
+    var username = ""
+    var phone = ""
+}
 object URL{
     var baseUrl = "http://10.0.2.2:5000/"
 }

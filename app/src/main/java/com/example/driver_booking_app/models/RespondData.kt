@@ -28,3 +28,36 @@ data class TripResponse(
     var message: String = "",
     var passenger: String = "",
 )
+
+data class UpdateGpsResponse(
+    var message: String = ""
+)
+
+data class ProfilePassenger(
+    var email: String = "",
+    var phone: String = "",
+    var username: String = ""
+)
+data class GetProfilePassengerResponse(
+    var passengers: List<ProfilePassenger>,
+    var message: String = ""
+)
+
+data class TripInfo(
+    var dest_address:String = "",
+    var dest_lat:String = "",
+    var dest_long:String = "",
+    var origin_address:String = "",
+    var origin_lat:String = "",
+    var origin_long:String = "",
+    var role: String = "",
+    var username: String = ""
+)
+
+data class CurrentInformation(
+    var information:TripInfo?,
+    var lat:String = "",
+    var long:String = "",
+    var message: String = "",
+)
+

@@ -44,6 +44,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/passenger_name_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Phạm Minh Tú"
@@ -52,6 +53,7 @@
                     android:textColor="@color/white"/>
 
                 <TextView
+                    android:id="@+id/passenger_phone_number_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0123456789"

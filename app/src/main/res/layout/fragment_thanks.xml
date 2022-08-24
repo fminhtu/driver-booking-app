@@ -98,7 +98,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please rating your driver"
+                android:text="Rating your passenger"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
             <RatingBar
                 android:id="@+id/service_rating_bar"
@@ -109,6 +109,14 @@
                 android:progressTint="@color/red_600"
                 android:rating="4.25"
                 android:secondaryProgressTint="#FFFFFF" />
+
+            <Button
+                android:id="@+id/back_btn"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BACK"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

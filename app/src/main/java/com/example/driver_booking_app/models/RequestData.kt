@@ -25,3 +25,15 @@ data class TripResquest(
     var dest_lat:String = "",
     var dest_long:String = ""
 )
+
+data class UpdateGpsRequest(
+    var username: String = "",
+    var role: String = "driver",
+    var lat:String = "333",
+    var long:String = "555"
+)
+
+data class TripInformationRequest(
+    var role: String = "driver",
+    var username: String = "",
+)

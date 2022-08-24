@@ -26,6 +26,7 @@
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/activity_sign_in.xml" value="0.14947916666666666" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.14947916666666666" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/app_bar_main.xml" value="0.1431159420289855" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/book_ride_panel.xml" value="0.14947916666666666" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/content_main.xml" value="0.12760416666666666" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/control_trip_panel.xml" value="0.264" />
@@ -33,7 +34,7 @@
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/fragment_history.xml" value="0.14719202898550723" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/fragment_profile.xml" value="0.14719202898550723" />
-        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/fragment_thanks.xml" value="0.14947916666666666" />
+        <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/fragment_thanks.xml" value="0.264" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/history_item.xml" value="0.14719202898550723" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/nav_header_main.xml" value="0.11302083333333333" />
         <entry key="..\:/StudyAtHCMUS/NamBa/SoftwareArchitecture/DriverApp/app/src/main/res/layout/receive_trip_panel.xml" value="0.2" />
