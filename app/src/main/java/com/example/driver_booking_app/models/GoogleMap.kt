@@ -13,6 +13,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.PolyUtil
+
 import org.json.JSONObject
 
 class GoogleMap : SupportMapFragment(), OnMapReadyCallback {
