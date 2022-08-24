@@ -22,6 +22,13 @@ interface ApiRequest {
 
     @POST("/trip-request")
     fun findStrip(@Header("x-access-token") authToken: String, @Body tripResquest: TripResquest): Call<TripResponse>
+
+    @POST("/trip-information")
+    fun getTripInformation(@Header("x-access-token") authToken: String, @Body tripInfomationRequest: TripInformationRequest): Call<CurrentInformation>
+
+    @POST("/get-profile")
+    fun getProfileDriver(@Header("x-access-token") authToken: String, @Body information: Account): Call<GetDriverProfileRespond>
+
 }
 
 object Retrofit{

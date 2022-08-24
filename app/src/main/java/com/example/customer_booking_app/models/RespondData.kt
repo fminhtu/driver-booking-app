@@ -19,10 +19,41 @@ data class GetProfileRespond(
     var message: String = ""
 )
 
+data class DriverProfile(
+    var email: String = "",
+    var phone: String = "",
+    var username: String = "",
+    var seed: String = "",
+    var licence_plate: String = ""
+)
+
+data class GetDriverProfileRespond(
+    var drivers: List<DriverProfile>,
+    var message: String = ""
+)
+
 data class EditProfileRespond(val message: String = "")
 
 data class TripResponse(
     var driver: String = "",
     var message: String = "",
     var passenger: String = "",
+)
+
+data class TripInfo(
+    var dest_address:String = "",
+    var dest_lat:String = "",
+    var dest_long:String = "",
+    var origin_address:String = "",
+    var origin_lat:String = "",
+    var origin_long:String = "",
+    var role: String = "",
+    var username: String = ""
+)
+
+data class CurrentInformation(
+    var information:TripInfo?,
+    var lat:String = "",
+    var long:String = "",
+    var message: String = "",
 )

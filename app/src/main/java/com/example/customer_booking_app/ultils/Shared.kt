@@ -20,6 +20,15 @@ object TripInformation {
     var destAddress = ""
 }
 
+object DriverProfileObj{
+    var username = ""
+    var phone = ""
+    var email = ""
+    var seed = ""
+    var licencePlate = ""
+    val role = "driver"
+}
+
 object URL{
     var baseUrl = "http://10.0.2.2:5000/"
 }

@@ -14,7 +14,7 @@ data class LoginAccount(
 )
 
 data class TripResquest(
-    var role: String = "driver",
+    var role: String = "passenger",
     var username: String = "",
     var origin_address:String = "",
     var origin_lat:String = "",
@@ -22,4 +22,10 @@ data class TripResquest(
     var dest_address:String = "",
     var dest_lat:String = "",
     var dest_long:String = ""
+)
+
+
+data class TripInformationRequest(
+    var role: String = "driver",
+    var username: String = "",
 )

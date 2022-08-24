@@ -50,6 +50,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/driver_license_number_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="71C2.05050"
@@ -68,6 +69,7 @@
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
             <TextView
+                android:id="@+id/driver_name_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giáo Sư Kha"
