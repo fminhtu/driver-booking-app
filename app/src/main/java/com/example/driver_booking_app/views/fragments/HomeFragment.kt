@@ -277,6 +277,12 @@ class HomeFragment : Fragment(){
                             passengerPhoneNumberTextView.setText(passengerInfo.body()!!.passengers[0].phone)
                             destinationLocationTextView.setText(TripInformation.destAddress)
                             pickUpLocationTextview.setText(TripInformation.originAddress)
+
+                            var location = LatLng("10.757336".toDouble(), "106.684890".toDouble())
+                            var destination = LatLng(TripInformation.destLat.toDouble(), TripInformation.destLong.toDouble())
+                            mapFragment.markerFrom(location, "I'm There")
+                            mapFragment.markerTo(destination, "Destination")
+                            mapFragment.moveCamera(location, 15f)
                         }
                     }
                 }
@@ -355,6 +361,7 @@ class HomeFragment : Fragment(){
                                 onOffStripBtn.setText("Click to on")
                                 TripInformation.driver = ""
                                 isRecieveStrip = false
+                                mapFragment.clearMap()
                                 findNavController().navigate(R.id.action_nav_home_to_nav_thanks)
                             }
                         }
@@ -374,6 +381,15 @@ class HomeFragment : Fragment(){
                     val updateGpsRes = api.updateGps(Information.token, updateGpsReq).awaitResponse()
                     if(updateGpsRes.code() == 200){
                         if(updateGpsRes.body()!!.message.equals("Updated")){
+                            callGetGps()
+                            withContext(Dispatchers.Main){
+                                mapFragment.clearMap()
+                                var location = LatLng("10.756587".toDouble(), "106.685169".toDouble())
+                                var destination = LatLng(TripInformation.destLat.toDouble(), TripInformation.destLong.toDouble())
+                                mapFragment.markerFrom(location, "I'm there")
+                                mapFragment.markerTo(destination, "Destination")
+                                mapFragment.moveCamera(location, 15f)
+                            }
 
                         }
                     }
@@ -386,9 +402,11 @@ class HomeFragment : Fragment(){
     private fun callGetGps(){
         val api = com.example.driver_booking_app.ultils.Retrofit.createApi()
         val tripRequest = TripInformationRequest("driver", Information.username)
+        var isNearLocation = false
+        var oldLocation = TripInformation.originLat
         GlobalScope.launch {
             try{
-                while(!isEndtrip){
+                while(!isNearLocation){
                     val tripInfoResponse = api.getTripInformation(Information.token, tripRequest).awaitResponse()
                     Log.i("ASD", tripInfoResponse.code().toString())
                     Log.i("ASD", tripInfoResponse.body().toString())
@@ -413,9 +431,11 @@ class HomeFragment : Fragment(){
                             }
                             Log.i("ASD", "update location 5")
                             val distance = mapFragment.distance(destination,location)
-                            if(distance < 100 && !isPopupNotification){
+                            if(distance <= 100){
+                                isNearLocation = true
                                 withContext(Dispatchers.Main){
                                     Toast.makeText(requireContext(), "You are going to destination", Toast.LENGTH_SHORT).show()
+                                    mapFragment.moveCamera(location, 18f)
                                 }
                             }
                         }
@@ -423,7 +443,42 @@ class HomeFragment : Fragment(){
                     delay(TimeUnit.SECONDS.toMillis(2))
                 }
             } catch (e: Exception){
-                Log.i("ASD", e.message.toString())
+                while(!isNearLocation){
+                    val tripInfoResponse = api.getTripInformation(Information.token, tripRequest).awaitResponse()
+                    Log.i("ASD", tripInfoResponse.code().toString())
+                    Log.i("ASD", tripInfoResponse.body().toString())
+                    if(tripInfoResponse.code() == 200) {
+                        if(tripInfoResponse.body()!!.message.equals("driver is not found")){
+                            break
+                        } else {
+                            Log.i("ASD", "update location 1")
+                            val location = LatLng(tripInfoResponse.body()!!.lat.toDouble(), tripInfoResponse.body()!!.long.toDouble())
+                            val destination = LatLng(destLat.toDouble(), destLng.toDouble())
+                            Log.i("ASD", "update location 2")
+                            if(!tripInfoResponse.body()!!.lat.equals(oldLocation)){
+                                withContext(Dispatchers.Main){
+                                    Log.i("ASD", "update location 3")
+                                    oldLocation = tripInfoResponse.body()!!.lat
+                                    mapFragment.clearMap()
+                                    Log.i("ASD", "update location 4")
+                                    mapFragment.markerFrom(location, "I'm there")
+                                    mapFragment.markerTo(destination, "Destination")
+                                    mapFragment.moveCamera(location, 15f)
+                                }
+                            }
+                            Log.i("ASD", "update location 5")
+                            val distance = mapFragment.distance(destination,location)
+                            if(distance <= 100){
+                                isNearLocation = true
+                                withContext(Dispatchers.Main){
+                                    Toast.makeText(requireContext(), "You are going to destination", Toast.LENGTH_SHORT).show()
+                                    mapFragment.moveCamera(location, 18f)
+                                }
+                            }
+                        }
+                    }
+                    delay(TimeUnit.SECONDS.toMillis(2))
+                }
             }
         }
 
