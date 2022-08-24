@@ -20,6 +20,7 @@ import com.example.driver_booking_app.ultils.Information
 import com.example.driver_booking_app.ultils.TripInformation
 import com.example.driver_booking_app.viewModels.HomeViewModel
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.material.chip.Chip
@@ -37,7 +38,7 @@ enum class ViewControl{
 class HomeFragment : Fragment(){
 
     private lateinit var rootView:View
-    private lateinit var mapFragment: SupportMapFragment
+    private lateinit var mapFragment: GoogleMap
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var declineBtn: Chip
     private lateinit var onOffStripBtn: Chip
@@ -55,9 +56,12 @@ class HomeFragment : Fragment(){
     private lateinit var destinationLocationTextView: TextView
     private lateinit var startBtn: Button
     // This property is only valid between onCreateView and
-    val AUTOCOMPLETE_REQUEST_CODE = 1
     var isOnStrip = false
     var isRecieveStrip = false
+    var pickMeLat:String = "10.754452"
+    var pickMeLng:String = "106.686539"
+    var destLat:String = "10.7625"
+    var destLng:String = "106.6823"
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -248,6 +252,8 @@ class HomeFragment : Fragment(){
             val updateGpsReq = UpdateGpsRequest(
                 Information.username,
                 "driver",
+                    "10.757336",
+                "106.684890"
             )
             controlPanel(ViewControl.DISPLAY_CONTROL_TRIP)
             GlobalScope.launch(Dispatchers.IO) {
@@ -360,23 +366,15 @@ class HomeFragment : Fragment(){
                 val updateGpsReq = UpdateGpsRequest(
                     Information.username,
                     "driver",
-                    "999",
-                    "100"
+                    "10.756587",
+                    "106.685169"
                 )
                 Toast.makeText(requireContext(), "Start your uber", Toast.LENGTH_SHORT).show()
                 GlobalScope.launch(Dispatchers.IO) {
                     val updateGpsRes = api.updateGps(Information.token, updateGpsReq).awaitResponse()
                     if(updateGpsRes.code() == 200){
                         if(updateGpsRes.body()!!.message.equals("Updated")){
-                            var acc = Account(
-                                TripInformation.passenger,
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "passenger"
-                            )
+
                         }
                     }
                 }
@@ -385,6 +383,51 @@ class HomeFragment : Fragment(){
 
     }
 
+    private fun callGetGps(){
+        val api = com.example.driver_booking_app.ultils.Retrofit.createApi()
+        val tripRequest = TripInformationRequest("driver", Information.username)
+        GlobalScope.launch {
+            try{
+                while(!isEndtrip){
+                    val tripInfoResponse = api.getTripInformation(Information.token, tripRequest).awaitResponse()
+                    Log.i("ASD", tripInfoResponse.code().toString())
+                    Log.i("ASD", tripInfoResponse.body().toString())
+                    if(tripInfoResponse.code() == 200) {
+                        if(tripInfoResponse.body()!!.message.equals("driver is not found")){
+                            break
+                        } else {
+                            Log.i("ASD", "update location 1")
+                            val location = LatLng(tripInfoResponse.body()!!.lat.toDouble(), tripInfoResponse.body()!!.long.toDouble())
+                            val destination = LatLng(destLat.toDouble(), destLng.toDouble())
+                            Log.i("ASD", "update location 2")
+                            if(!tripInfoResponse.body()!!.lat.equals(oldLocation)){
+                                withContext(Dispatchers.Main){
+                                    Log.i("ASD", "update location 3")
+                                    oldLocation = tripInfoResponse.body()!!.lat
+                                    mapFragment.clearMap()
+                                    Log.i("ASD", "update location 4")
+                                    mapFragment.markerFrom(location, "I'm there")
+                                    mapFragment.markerTo(destination, "Destination")
+                                    mapFragment.moveCamera(location, 15f)
+                                }
+                            }
+                            Log.i("ASD", "update location 5")
+                            val distance = mapFragment.distance(destination,location)
+                            if(distance < 100 && !isPopupNotification){
+                                withContext(Dispatchers.Main){
+                                    Toast.makeText(requireContext(), "You are going to destination", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+                    delay(TimeUnit.SECONDS.toMillis(2))
+                }
+            } catch (e: Exception){
+                Log.i("ASD", e.message.toString())
+            }
+        }
+
+    }
 
     private fun getMapAsync(){
         mapFragment.getMapAsync {
