@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:24.2.1'
     implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.1'
     implementation 'com.google.android.libraries.places:places:2.6.0'
+    implementation 'com.google.maps.android:android-maps-utils:2.3.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
